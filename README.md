@@ -129,6 +129,8 @@ The quickest way to get MaskCam running on your Jetson Nano Dev Kit is by using 
    - Click `Play`.
 
 4. **Watch the Stream**:
+   
+ [![Watch the video](https://img.youtube.com/vi/xdeqE5vwJhM/hqdefault.jpg)](https://www.youtube.com/watch?v=xdeqE5vwJhM&autoplay=1)
 
    VLC will start streaming the live video from your Jetson Nano, showing real-time mask detection with green boxes for masked faces and red boxes for unmasked faces.
 
