@@ -1,5 +1,6 @@
 
 # MaskCam - Real-time Mask Detection System
+<img width="951" alt="Screenshot 2024-08-14 182340" src="https://github.com/user-attachments/assets/bcc477d2-51c4-40e2-8725-bb6052919f26">
 
 ## Introduction
 
