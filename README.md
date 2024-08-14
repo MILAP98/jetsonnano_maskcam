@@ -21,6 +21,18 @@ Key capabilities include:
 
 By using MaskCam, you can leverage the power of edge AI on the Jetson Nano, making it an excellent tool for developing, testing, and deploying real-time detection models in various environments.
 
+## Table of Contents
+
+1. [Hardware Requirements](#hardware-requirements)
+2. [Setting Up the Jetson Nano](#setting-up-the-jetson-nano)
+3. [Installing PyTorch with GPU Support](#installing-pytorch-with-gpu-support)
+4. [Downloading YOLOv5](#downloading-yolov5)
+5. [Setting Up the USB CAM](#setting-up-the-USB-cam)
+6. [Running YOLOv5 for Mask Detection](#running-yolov5-for-mask-detection)
+7. [Training a Custom Model](#training-a-custom-model)
+8. [Running the Custom Model](#running-the-custom-model)
+9. [References](#references)
+
 ## Setup Instructions
 
 ### Flashing and Installing JetPack
