@@ -5,18 +5,18 @@
 
 ### Aim of This Repository
 
-The primary goal of this repository is to provide a starting point for anyone looking to explore AI and object detection on the NVIDIA Jetson Nano. Whether you're a beginner or an experienced developer, this project aims to help you quickly set up a real-time detection system, making it easier to start learning and experimenting with AI at the edge.
+The primary goal of this repository is to provide a starting point for anyone looking to explore AI and object detection on the NVIDIA Jetson Nano. Whether you're a beginner or an experienced developer, this project aims to help you quickly set up a real-time detection system, making it easier to start learning and experimenting with Jetson Nano.
 
 ### What You Can Achieve with MaskCam
 
-MaskCam is a prototype reference design for a Jetson Nano-based smart camera system that measures face mask usage in real-time. All AI computations are performed at the edge, allowing for efficient and immediate detection without relying on cloud resources. MaskCam detects and tracks people in its field of view, determining whether they are wearing a mask using object detection and tracking algorithms.
+MaskCam is a prototype reference design for a Jetson Nano-based smart camera system that measures face mask usage in real-time. All AI computations are performed on jetson nano, allowing for efficient and immediate detection without relying on cloud resources. MaskCam detects and tracks people in its field of view, determining whether they are wearing a mask using object detection and tracking algorithms.
 
 Key capabilities include:
 
 - **Real-Time Mask Detection**: Accurately detects and tracks individuals, identifying mask usage in real-time.
 - **Edge AI Processing**: Runs entirely on the Jetson Nano, eliminating the need for cloud-based processing and ensuring quick response times.
-- **Optional Video Streaming**: Capable of streaming video via RTSP, which can be viewed on VLC or similar players, providing a live view of detections.
-- **Versatile Deployment**: Can be run on a Jetson Nano Developer Kit or Jetson Nano module, compatible with any Linux-supported USB webcam.
+- **Video Streaming**: Capable of streaming video via RTSP, which can be viewed on VLC , providing a live view of detections.
+- **Versatile Deployment**: Can be run on a Jetson Nano Developer Kit or Jetson Nano module
 
 By using MaskCam, you can leverage the power of edge AI on the Jetson Nano, making it an excellent tool for developing, testing, and deploying real-time detection models in various environments.
 
