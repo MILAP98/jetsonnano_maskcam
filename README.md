@@ -42,12 +42,18 @@ By using MaskCam, you can leverage the power of edge AI on the Jetson Nano, maki
 1. **Enable SSH**:
 
    During the initial Jetson Nano setup, ensure that SSH is enabled.
-   Find the IP address of your Jetson Nano using `ifconfig`.
+   
+   ```python
+   sudo systemctl enable ssh
+ 
+   sudo systemctl start ssh.
 
-2. **Access the Nano via SSH**:
+Find the IP address of your Jetson Nano using `ifconfig`.
+
+3. **Access the Nano via SSH**:
 
    From another computer, open a terminal and run:
-   ```bash
+   ```python
    ssh username@<your-jetson-ip>
    ```
    Replace `username` with your Jetson Nano username and `<your-jetson-ip>` with its IP address.
@@ -127,20 +133,17 @@ The quickest way to get MaskCam running on your Jetson Nano Dev Kit is by using 
 
 This allows you to remotely view the output of MaskCam on any computer within the same network.
 
-## Troubleshooting
-
-If you encounter issues, refer to the [Troubleshooting Common Errors](https://github.com/bdtinc/maskcam/blob/main/README.md#troubleshooting-common-errors) section for tips on resolving common problems such as camera recognition failures, streaming errors, and more.
-
-## Contributing
-
-Contributions are welcome! Please submit a pull request or open an issue to discuss your ideas or improvements.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgements
 
 - **YOLOv5**: Special thanks to the creators of YOLOv5 for providing a powerful object detection framework.
 - **NVIDIA Jetson**: Thanks to NVIDIA for the Jetson platform, which makes edge computing possible.
 - **Open Source Libraries**: This project relies on numerous open-source libraries and tools.
+- This project is heavily inspired by and based on the work from the [MaskCam repository by bdtinc](https://github.com/bdtinc/maskcam/tree/main/maskcam).
+
+ 
+
+### References
+
+For more information, you can visit the original [MaskCam repository](https://github.com/bdtinc/maskcam/tree/main/maskcam) by bdtinc. This repository contains detailed documentation, examples, and the original implementation of the MaskCam project.
+We extend our gratitude to the creators of the original MaskCam project for their hard work and contributions to the community.
+
