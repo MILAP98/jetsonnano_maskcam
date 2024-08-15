@@ -139,16 +139,80 @@ Find the IP address of your Jetson Nano using `ifconfig`.
    ```bash
    sudo python3 detect.py
    ```
+# Running YOLOv5 on a USB Camera and Streaming via RTSP
 
-2. **Find Your Nano's IP Address**:
+## 1. Modify the `detect.py` Script to Use the USB Camera
 
-   Use `ifconfig` to find your local Jetson Nano IP address.
+By default, YOLOv5's `detect.py` script allows you to specify the source of the video input. To use your USB camera instead of the ESP32-CAM, you would typically set the source to `/dev/video0` (or another device path if your camera is on a different path).
 
-3. **Run MaskCam**:
+## 2. Running YOLOv5 on the USB Camera
+
+You can run the `detect.py` script on your USB camera with the following command:
+
+```bash
+sudo python3 detect.py --source /dev/video0 --view-img
+```
+
+This command tells YOLOv5 to use the video feed from the USB camera for detection.
+
+## 3. Streaming the Output via RTSP
+
+Next, to stream the processed video via RTSP so that it can be viewed in VLC, you need to modify the `detect.py` script to include GStreamer or use an RTSP server.
+
+### Option 1: Using GStreamer for Direct Streaming
+
+Here's how you can do it by modifying the `detect.py` script to output the video stream using GStreamer:
+
+1. **Install GStreamer** (if it's not already installed):
 
    ```bash
-   sudo docker run --runtime nvidia --privileged --rm -it --env MASKCAM_DEVICE_ADDRESS=<your-jetson-ip> -p 1883:1883 -p 8080:8080 -p 8554:8554 maskcam/maskcam-beta
+   sudo apt-get install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-rtsp
    ```
+
+2. **Modify `detect.py`**:
+
+   In the `detect.py` script, after processing the frames with YOLOv5, add a GStreamer pipeline to stream the output via RTSP:
+
+   ```python
+   import cv2
+
+   cap = cv2.VideoCapture('/dev/video0')
+
+   # GStreamer pipeline for RTSP streaming
+   out = cv2.VideoWriter('appsrc ! videoconvert ! x264enc tune=zerolatency bitrate=500 speed-preset=superfast ! rtph264pay config-interval=1 pt=96 ! udpsink host=127.0.0.1 port=8554', cv2.CAP_GSTREAMER, 0, 30, (640, 480), True)
+
+   while cap.isOpened():
+       ret, frame = cap.read()
+       if not ret:
+           break
+
+       # Run YOLOv5 detection on the frame
+       # ... (your detection code here)
+
+       # Write the frame to the GStreamer pipeline
+       out.write(frame)
+
+   cap.release()
+   out.release()
+   ```
+
+3. **Run the Script**:
+
+   Run the modified `detect.py` script:
+
+   ```bash
+   sudo python3 detect.py
+   ```
+
+4. **Access the Stream via VLC**:
+
+   On a different machine, open VLC and connect to the stream:
+
+   ```bash
+   rtsp://<jetson-nano-ip>:8554
+   ```
+
+Replace `<jetson-nano-ip>` with the actual IP address of your Jetson Nano.
 
 ### Viewing the Live Video Stream with VLC
 
