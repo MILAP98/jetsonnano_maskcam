@@ -146,11 +146,11 @@ Find the IP address of your Jetson Nano using `ifconfig`.
    ```
 ## Running YOLOv5 on a USB Camera and Streaming via RTSP
 
-## 1. Modify the `detect.py` Script to Use the USB Camera
+1. Modify the `detect.py` Script to Use the USB Camera
 
 By default, YOLOv5's `detect.py` script allows you to specify the source of the video input. To use your USB camera instead of the ESP32-CAM, you would typically set the source to `/dev/video0` (or another device path if your camera is on a different path).
 
-## 2. Running YOLOv5 on the USB Camera
+**Running YOLOv5 on the USB Camera**
 
 You can run the `detect.py` script on your USB camera with the following command:
 
@@ -160,11 +160,11 @@ sudo python3 detect.py --source /dev/video0 --view-img
 
 This command tells YOLOv5 to use the video feed from the USB camera for detection.
 
-## 3. Streaming the Output via RTSP
+**Streaming the Output via RTSP**
 
 Next, to stream the processed video via RTSP so that it can be viewed in VLC, you need to modify the `detect.py` script to include GStreamer or use an RTSP server.
 
-### Option 1: Using GStreamer for Direct Streaming
+###  Using GStreamer for Direct Streaming
 
 Here's how you can do it by modifying the `detect.py` script to output the video stream using GStreamer:
 
@@ -245,11 +245,9 @@ This allows you to  view the output of MaskCam on any computer within the same n
 - **YOLOv5**: Special thanks to the creators of YOLOv5 for providing a powerful object detection framework.
 - **NVIDIA Jetson**: Thanks to NVIDIA for the Jetson platform, which makes edge computing possible.
 - **Open Source Libraries**: This project relies on numerous open-source libraries and tools.
-- This project is heavily inspired by and based on the work from the [MaskCam repository by bdtinc](https://github.com/bdtinc/maskcam/tree/main/maskcam).
-
+- This project was inspired by the work detailed in the article "[Face Mask Detection with Nvidia Jetson Nano & YOLOv5](https://medium.com/nerd-for-tech/face-mask-detection-with-nvidia-jetson-nano-yolov5-b66f286f16d4)" by Nerd for Tech. We extend our gratitude to the author for providing a comprehensive guide that helped shape this implementation.
  
+## References
 
-### References
+- **Face Mask Detection with Nvidia Jetson Nano & YOLOv5**: [Read the full article](https://medium.com/nerd-for-tech/face-mask-detection-with-nvidia-jetson-nano-yolov5-b66f286f16d4) by Nerd for Tech on Medium.
 
-For more information, you can visit the original [MaskCam repository](https://github.com/bdtinc/maskcam/tree/main/maskcam) by bdtinc. This repository contains detailed documentation, examples, and the original implementation of the MaskCam project.
-We extend our gratitude to the creators of the original MaskCam project for their hard work and contributions to the community.
