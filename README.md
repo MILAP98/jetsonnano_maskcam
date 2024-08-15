@@ -1,5 +1,5 @@
 
-# MaskCam - Real-time Mask Detection System
+# Real-time FACE Mask Detection System with jetson Nano
 <img width="951" alt="Screenshot 2024-08-14 182340" src="https://github.com/user-attachments/assets/bcc477d2-51c4-40e2-8725-bb6052919f26">
 
 ## Introduction
@@ -8,9 +8,9 @@
 
 The primary goal of this repository is to provide a starting point for anyone looking to explore AI and object detection on the NVIDIA Jetson Nano. Whether you're a beginner or an experienced developer, this project aims to help you quickly set up a real-time detection system, making it easier to start learning and experimenting with Jetson Nano.
 
-### What You Can Achieve with MaskCam
+### What You Can Achieve with FACE MASK DETAECTION
 
-MaskCam is a prototype reference design for a Jetson Nano-based smart camera system that measures face mask usage in real-time. All AI computations are performed on jetson nano, allowing for efficient and immediate detection without relying on cloud resources. MaskCam detects and tracks people in its field of view, determining whether they are wearing a mask using object detection and tracking algorithms.
+FACE MASK DETAECTION is a prototype reference design for a Jetson Nano-based smart camera system that measures face mask usage in real-time. All AI computations are performed on jetson nano, allowing for efficient and immediate detection without relying on cloud resources. MaskCam detects and tracks people in its field of view, determining whether they are wearing a mask using object detection and tracking algorithms.
 
 Key capabilities include:
 
@@ -27,11 +27,16 @@ By using MaskCam, you can leverage the power of edge AI on the Jetson Nano, maki
 2. [Setting Up the Jetson Nano](#setting-up-the-jetson-nano)
 3. [Installing PyTorch with GPU Support](#installing-pytorch-with-gpu-support)
 4. [Downloading YOLOv5](#downloading-yolov5)
-5. [Setting Up the USB CAM](#setting-up-the-USB-cam)
-6. [Running YOLOv5 for Mask Detection](#running-yolov5-for-mask-detection)
-7. [Training a Custom Model](#training-a-custom-model)
-8. [Running the Custom Model](#running-the-custom-model)
-9. [References](#references)
+5. [Running YOLOv5 on a USB Camera and Streaming via RTSP](#setting-up-the-USB-cam)
+6. [Running stream on VLC](#running-the-custom-model)
+7. [References](#references)
+
+## Hardware Requirements
+- NVIDIA Jetson Nano Developer Kit(4GB) with jetpack version 4.5
+- microSD card (minimum 128GB)
+- Power supply (5V, 4A via barrel jack recommended)
+- USB CAM module
+- USB keyboard, mouse, and monitor for initial setup
 
 ## Setting Up the Jetson Nano
 
@@ -50,9 +55,9 @@ By using MaskCam, you can leverage the power of edge AI on the Jetson Nano, maki
    Insert the flashed SD card into the Jetson Nano, connect a monitor, keyboard, and mouse, and power it on.
    Follow the on-screen instructions to complete the initial setup.
 
-### Setting Up SSH Access
+4. **Setting Up SSH Access**
 
-1. **Enable SSH**:
+-  **Enable SSH**:
 
    During the initial Jetson Nano setup, ensure that SSH is enabled.
    
@@ -63,7 +68,7 @@ By using MaskCam, you can leverage the power of edge AI on the Jetson Nano, maki
 
 Find the IP address of your Jetson Nano using `ifconfig`.
 
-3. **Access the Nano via SSH**:
+- **Access the Nano via SSH**:
 
    From another computer, open a terminal and run:
    ```python
@@ -71,9 +76,9 @@ Find the IP address of your Jetson Nano using `ifconfig`.
    ```
    Replace `username` with your Jetson Nano username and `<your-jetson-ip>` with its IP address.
 
-### System Update and Software Installation
+5. **System Update and Software Installation**
 
-1. **Update System Packages**:
+-  **Update System Packages**:
 
    After logging in via SSH, update the system packages:
    ```bash
@@ -81,7 +86,7 @@ Find the IP address of your Jetson Nano using `ifconfig`.
    sudo apt-get upgrade
    ```
 
-2. **Install Python 3 and Pip**:
+-  **Install Python 3 and Pip**:
 
    Install Python 3 and the package manager pip:
    ```bash
@@ -139,7 +144,7 @@ Find the IP address of your Jetson Nano using `ifconfig`.
    ```bash
    sudo python3 detect.py
    ```
-# Running YOLOv5 on a USB Camera and Streaming via RTSP
+## Running YOLOv5 on a USB Camera and Streaming via RTSP
 
 ## 1. Modify the `detect.py` Script to Use the USB Camera
 
@@ -163,7 +168,7 @@ Next, to stream the processed video via RTSP so that it can be viewed in VLC, yo
 
 Here's how you can do it by modifying the `detect.py` script to output the video stream using GStreamer:
 
-1. **Install GStreamer** (if it's not already installed):
+1. **Install GStreamer** 
 
    ```bash
    sudo apt-get install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-rtsp
@@ -216,23 +221,18 @@ Replace `<jetson-nano-ip>` with the actual IP address of your Jetson Nano.
 
 ### Viewing the Live Video Stream with VLC
 
-1. **Start MaskCam**: Run the MaskCam container and check the logs for the RTSP URL:
 
-   ```bash
-   Streaming at rtsp://<your-jetson-ip>:8554/maskcam
-   ```
-
-2. **Open VLC**:
+1. **Open VLC**:
 
    - On your other computer, open VLC Media Player.
    - Go to `Media > Open Network Stream`.
 
-3. **Enter the RTSP URL**:
+2. **Enter the RTSP URL**:
 
    - Paste the RTSP stream URL into the “Network URL” field.
    - Click `Play`.
 
-4. **Watch the Stream**:
+3. **Watch the Stream**:
    
  [![Watch the video](https://img.youtube.com/vi/xdeqE5vwJhM/hqdefault.jpg)](https://www.youtube.com/watch?v=xdeqE5vwJhM&autoplay=1)
 
@@ -253,4 +253,3 @@ This allows you to  view the output of MaskCam on any computer within the same n
 
 For more information, you can visit the original [MaskCam repository](https://github.com/bdtinc/maskcam/tree/main/maskcam) by bdtinc. This repository contains detailed documentation, examples, and the original implementation of the MaskCam project.
 We extend our gratitude to the creators of the original MaskCam project for their hard work and contributions to the community.
-
