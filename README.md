@@ -33,7 +33,7 @@ By using MaskCam, you can leverage the power of edge AI on the Jetson Nano, maki
 8. [Running the Custom Model](#running-the-custom-model)
 9. [References](#references)
 
-## Setup Instructions
+## Setting Up the Jetson Nano
 
 ### Flashing and Installing JetPack
 
@@ -87,29 +87,57 @@ Find the IP address of your Jetson Nano using `ifconfig`.
    ```bash
    sudo apt-get install python3-pip
    ```
+## Installing PyTorch with GPU Support
 
-3. **Install OpenCV**:
-
-   Install OpenCV, a critical library for computer vision applications:
+1. **Install PIP**: Install Python's package manager using the following commands:
    ```bash
-   sudo apt-get install libopencv-dev python3-opencv
+   sudo apt install curl
+   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+   sudo python3 get-pip.py
    ```
 
-### Running MaskCam from a Container on Jetson Nano
-
-The quickest way to get MaskCam running on your Jetson Nano Dev Kit is by using our pre-built Docker container. Here's what you'll need:
-
-- Jetson Nano Dev Kit with JetPack 4.5
-- External Power Supply: A DC 5V, 4A power supply connected via the barrel jack.
-- USB Webcam: Attach a Logitech USB webcam to the Nano.
-- RTSP Stream Viewer: Another computer with an RTSP stream viewer like VLC.
-
-### Steps to Run:
-
-1. **Pull the Container**:
-
+2. **Install PyTorch**: Download and install PyTorch with CUDA support:
    ```bash
-   sudo docker pull maskcam/maskcam-beta
+   sudo apt-get install libopenblas-base libopenmpi-dev
+   curl -LO https://nvidia.box.com/shared/static/p57jwntv436lfrd78inwl7iml6p13fzh.whl
+   mv p57jwntv436lfrd78inwl7iml6p13fzh.whl torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+   sudo pip3 install torch-1.8.0-cp36-cp36m-linux_aarch64.whl
+   ```
+
+3. **Verify Installation**: Confirm that PyTorch has been installed successfully:
+   ```bash
+   sudo python3 -c "import torch; print(torch.cuda.is_available())"
+   ```
+
+4. **Install torchvision**: Build and install torchvision:
+   ```bash
+   sudo apt install libjpeg-dev zlib1g-dev
+   git clone --branch v0.9.1 https://github.com/pytorch/vision torchvision
+   cd torchvision/
+   sudo python3 setup.py install
+   cd ..
+   ```
+
+## Downloading YOLOv5
+
+1. **Clone YOLOv5 Repository**:
+   ```bash
+   git clone https://github.com/ultralytics/yolov5.git
+   cd yolov5
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   export OPENBLAS_CORETYPE=ARMV8
+   sudo apt install libfreetype6-dev python3-dev
+   sudo pip3 install numpy==1.19.4
+   sudo pip3 install --ignore-installed PyYAML>=5.3.1
+   sudo pip3 install -r requirements.txt
+   ```
+
+3. **Test YOLOv5**: Run a test to verify the installation:
+   ```bash
+   sudo python3 detect.py
    ```
 
 2. **Find Your Nano's IP Address**:
